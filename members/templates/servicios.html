@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servicios | La Mangonada · Domicilio, Eventos y Más</title>
+<meta name="description" content="Servicios de La Mangonada en El Mante: entrega a domicilio en moto tipo DiDi, servicio para eventos y fiestas, pedidos para llevar, mayoreo y sabores personalizados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="servicios.html" class="active">Servicios</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="nosotros.html">Nosotros</a>
+
+{% if user.is_authenticated %}
+    <span>Hola, {{ user.username }}</span>
+    <a href="{% url 'logout' %}">Salir</a>
+{% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión</a>
+{% endif %}
+
+{% if es_admin %}
+    <a href="{% url 'lista_usuarios' %}">Usuarios</a>
+{% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============ SERVICIOS ============ -->
+<section id="servicios" class="alt" style="padding-top:60px;">
+  <div class="container">
+    <div class="sec-title">
+      <h2>🎉 Nuestros Servicios</h2>
+      <p>Además de nuestras mangonadas y boyos en el local, tenemos todo lo que necesitas para llevar el sabor de La Mangonada a donde tú quieras.</p>
+    </div>
+
+    <!-- 6 tarjetas de servicios, todas con imagen + ícono + texto + chip -->
+    <div class="grid grid-3" style="margin-top:40px;">
+      <div class="serv-card">
+        <img src="{% static  'images/domicilio.jpg' %}" alt="Moto de delivery tipo DiDi con caja naranja entregando pedidos" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">🛵</div>
+          <h3>Entrega a Domicilio</h3>
+          <p>Llevamos tu pedido hasta la puerta de tu casa en El Mante. Moto tipo DiDi, rápido y seguro. Mándanos tu ubicación por WhatsApp.</p>
+          <span class="tag-info">Disponible todo el horario</span>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <img src="{% static  'images/eventos.jpg' %}" alt="Mesa con boyos y mangonadas para fiesta" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">🎈</div>
+          <h3>Servicio para Eventos</h3>
+          <p>¿Fiesta infantil, familiar o de trabajo? Te armamos paquetes de mangonadas y boyos para tus invitados. ¡Llevamos la felicidad a tu evento!</p>
+          <span class="tag-info">Cotiza por WhatsApp</span>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <img src="{% static  'images/eventos.jpg' %}" alt="Pedido para llevar listo en bolsa" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">📦</div>
+          <h3>Pedidos para Llevar</h3>
+          <p>Haz tu pedido con anticipación y pasa a recogerlo ya listo. Ideal para no hacer fila y listo en minutos.</p>
+          <span class="tag-info">Anticipa con 1 hora</span>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <img src="{% static  'images/mayoreo.jpg' %}" alt="Caja con varias mangonadas para mayoreo" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">🏪</div>
+          <h3>Venta al Mayoreo</h3>
+          <p>¿Tienes un local o evento grande? Ofrecemos precios especiales para compras al mayoreo. Calidad constante y buen precio.</p>
+          <span class="tag-info">A partir de 50 piezas</span>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <img src="{% static  'images/gansito.jpg' %}" alt="Boyo creativo con decoración personalizada" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">🎨</div>
+          <h3>Sabores Personalizados</h3>
+          <p>Para eventos especiales preparamos mangonadas y boyos con sabores o decoraciones a tu gusto. Tú imaginas, nosotros lo creamos.</p>
+          <span class="tag-info">Solicita con 24 h</span>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <img src="{% static  'images/whatsap.jpg' %}" alt="Pedido por WhatsApp en celular" class="serv-img">
+        <div class="serv-body">
+          <div class="ico">📱</div>
+          <h3>Pedido por WhatsApp</h3>
+          <p>Mándanos tu pedido directo al 831 175 7955 y te lo tenemos listo en minutos. La forma más rápida de ordenar.</p>
+          <span class="tag-info">Respuesta rápida</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CTA principal: contactar por WhatsApp ============ -->
+    <div class="serv-cta">
+      <h3>📲 ¿Listo para ordenar o contratar un servicio?</h3>
+      <p>Escríbenos directo por WhatsApp al <strong>831 175 7955</strong> y te respondemos rápido.</p>
+      <a class="btn" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20agendar%20un%20servicio%20%F0%9F%9A%80" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
+    </div>
+
+    <div class="cta-final">
+      <a class="btn btn-wa" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20🎉" target="_blank" rel="noopener">💬 Cotiza tu servicio</a>
+      <a class="btn btn-menu" href="productos.html">Ver productos</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><span class="brand">🥭 La Mangonada</span> · Colima #108, El Mante · Lunes a domingo de 12:00 pm a 8:00 pm</p>
+  <p style="margin-top:6px;opacity:.7;">Mangonadas y boyos a $15 · Hecho con ❤️ en El Mante</p>
+  <p style="margin-top:8px;"><a href="index.html">Inicio</a> · <a href="contactos.html">Contactos</a> · <a href="nosotros.html">Nosotros</a></p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">💬</a>
+
+</body>
+</html>

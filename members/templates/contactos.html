@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contactos | La Mangonada · WhatsApp, Dirección y Correo</title>
+<meta name="description" content="Contactos de La Mangonada en El Mante. WhatsApp 831 175 7955, dirección Colima #108, correo castleclashyeti@gmail.com. Horario: lunes a domingo de 12:00 pm a 8:00 pm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contactos.html" class="active">Contactos</a>
+      <a href="nosotros.html">Nosotros</a>
+
+{% if user.is_authenticated %}
+    <span>Hola, {{ user.username }}</span>
+    <a href="{% url 'logout' %}">Salir</a>
+{% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión</a>
+{% endif %}
+
+{% if es_admin %}
+    <a href="{% url 'lista_usuarios' %}">Usuarios</a>
+{% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============ CONTACTOS ============ -->
+<section id="contactos" class="white-sec" style="padding-top:60px;">
+  <div class="container">
+    <div class="sec-title">
+      <h2>💬 Ponte en Contacto</h2>
+      <p>Estamos listos para preparar tu mangonada o tu boyo favorito. Escríbenos o visítanos cuando quieras.</p>
+    </div>
+    <div class="contacto-grid">
+      <div class="contact-card">
+        <div class="ico">📱</div>
+        <h3>WhatsApp</h3>
+        <p><a href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener">831 175 7955</a></p>
+        <p style="margin-top:6px;font-size:.85rem;opacity:.7;">Click para escribirnos</p>
+      </div>
+      <div class="contact-card">
+        <div class="ico">📍</div>
+        <h3>Dirección</h3>
+        <p>Colima #108, El Mante, Tamaulipas</p>
+      </div>
+      <div class="contact-card">
+        <div class="ico">📧</div>
+        <h3>Correo</h3>
+        <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=castleclashyeti@gmail.com&su=Hola%20La%20Mangonada&body=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20" target="_blank" rel="noopener" id="correo-link">castleclashyeti@gmail.com</a></p>
+        <p style="margin-top:8px;font-size:.85rem;opacity:.7;">Click para abrir tu correo y escribirnos · Respuesta en 24 h</p>
+        <a class="btn-mini" href="https://mail.google.com/mail/?view=cm&fs=1&to=castleclashyeti@gmail.com&su=Hola%20La%20Mangonada&body=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20" target="_blank" rel="noopener">✉️ Abrir Gmail y escribir</a>
+      </div>
+      <div class="contact-card">
+        <div class="ico">🕛</div>
+        <h3>Horario</h3>
+        <p>Lunes a domingo<br>12:00 pm a 8:00 pm</p>
+        <p style="margin-top:6px;font-size:.85rem;opacity:.7;">Abrimos todos los días</p>
+      </div>
+    </div>
+
+
+
+   {% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabaja con nosotros | La Mangonada</title>
+    <!-- Vinculamos tu archivo CSS externo -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+   <!-- SECCIÓN FORMULARIO CON ESTILOS CSS LIMPIOS -->
+<div class="contacto-container">
+    <h2>📝 Trabaja en La Mangonada</h2>
+    <p>¿Quieres formar parte del equipo? Déjanos tus datos y postúlate.</p>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
+        </div>
+
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required placeholder="Ej. 20">
+        </div>
+
+
+<div class="form-group">
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" required placeholder="Ej. correo@mail.com">
+</div>
+
+
+
+        <button type="submit" class="btn-enviar">Enviar Solicitud</button>
+    </form>
+</div>
+
+
+
+
+<hr style="margin: 30px 0;">
+
+{% if es_admin %}
+
+<!-- TABLA PARA CONSULTAR, MODIFICAR Y ELIMINAR -->
+<h3>Postulantes Registrados (Base de Datos)</h3>
+<table border="1" style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 15px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 8px;">ID</th>
+            <th style="padding: 8px;">Nombre</th>
+            <th style="padding: 8px;">Edad</th>
+            <th style="padding: 8px;">Correo</th> <!-- AQUÍ VA -->
+            <th style="padding: 8px;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for persona in candidatos %}
+        <tr>
+            <td style="padding: 8px;">{{ persona.id }}</td>
+            <td style="padding: 8px;">{{ persona.nombre }}</td>
+            <td style="padding: 8px;">{{ persona.edad }}</td>
+            <td style="padding: 8px;">{{ persona.correo }}</td> <!-- Y AQUÍ VA EL DATO -->
+            <td style="padding: 8px;">
+                <a href="{% url 'editar_candidato' persona.id %}" style="color: blue; margin-right: 10px;">Editar ✏️</a>
+                <a href="{% url 'eliminar_candidato' persona.id %}" onclick="return confirm('¿Seguro que deseas eliminar este registro?');" style="color: red;">Eliminar ❌</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="padding: 8px; text-align: center;">No hay postulantes registrados aún.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+
+    <div class="cta-final">
+      <a class="btn btn-wa" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20informaci%C3%B3n%20%F0%9F%92%AC" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+      <a class="btn btn-menu" href="https://wa.me/528311757955" target="_blank" rel="noopener">📱 Contactar al 831 175 7955</a>
+      <a class="btn btn-menu" href="index.html" style="margin-left:8px;">🥭 Volver al inicio</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><span class="brand">🥭 La Mangonada</span> · Colima #108, El Mante · Lunes a domingo de 12:00 pm a 8:00 pm</p>
+  <p style="margin-top:6px;opacity:.7;">Mangonadas y boyos a $15 · Hecho con ❤️ en El Mante</p>
+  <p style="margin-top:8px;"><a href="index.html">Inicio</a> · <a href="nosotros.html">Nosotros</a></p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">💬</a>
+
+</body>
+</html>

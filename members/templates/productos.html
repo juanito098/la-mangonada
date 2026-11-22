@@ -1,0 +1,577 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos · Mangonadas y Boyos | La Mangonada El Mante</title>
+<meta name="description" content="Mangonadas de mango y piña con tajín, limón, chamoy y ticko dulce. Boyos de fresa, mazapán, oreo, coco y galleta María. Todos a $15.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+  #mangonadas .card img {
+    width: 100%;
+    height: 230px;
+    object-fit: fill;
+    object-position: center;
+    display: block;
+  }
+  .extra-carrito-tag {
+    display: block;
+    font-size: 0.85rem;
+    color: #5a3a00;
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html" class="active">Productos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="nosotros.html">Nosotros</a>
+
+{% if user.is_authenticated %}
+    <span>Hola, {{ user.username }}</span>
+    <a href="{% url 'logout' %}">Salir</a>
+{% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión</a>
+{% endif %}
+
+{% if es_admin %}
+    <a href="{% url 'lista_usuarios' %}">Usuarios</a>
+{% endif %}
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============ PRODUCTOS · MANGONADAS ============ -->
+<section id="mangonadas" class="alt" style="padding-top:60px;">
+  <div class="container">
+    <div class="sec-title">
+      <h2>🥭 Mangonadas</h2>
+      <p>Preparadas al momento con fruta. ¡La combinación perfecta de dulce, ácido y picosito!</p>
+      <span class="badge-precio">$15 c/u</span>
+    </div>
+
+    <!-- CHIPS INTERACTIVAS (SOLO PARA MANGONADAS) -->
+    <div class="chips-container" style="justify-content: center; margin-bottom: 25px;">
+      <div>
+        <input type="checkbox" id="chip-tajin" class="chip-checkbox" value="Tajín">
+        <label for="chip-tajin" class="chip-label">🌶️ Tajín</label>
+      </div>
+      <div>
+        <input type="checkbox" id="chip-limon" class="chip-checkbox" value="Limón">
+        <label for="chip-limon" class="chip-label">🍋 Limón</label>
+      </div>
+      <div>
+        <input type="checkbox" id="chip-chamoy" class="chip-checkbox" value="Chamoy">
+        <label for="chip-chamoy" class="chip-label">❤️ Chamoy</label>
+      </div>
+      <div>
+        <input type="checkbox" id="chip-ticko" class="chip-checkbox" value="Ticko dulce">
+        <label for="chip-ticko" class="chip-label">🍭 Ticko dulce</label>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:20px;">
+      <div class="card">
+        <img src="{% static 'images/mangada.jpg' %}" alt="Mangonada de mango">
+        <div class="card-body">
+          <h3>Mangonada de Mango</h3>
+          <div class="precio">$15 <span>pesos</span></div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Mangonada de Mango', 15, 'mangonada')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/piña.jpg' %}" alt="Mangonada de piña">
+        <div class="card-body">
+          <h3>Mangonada de Piña</h3>
+          <div class="precio">$15 <span>pesos</span></div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Mangonada de Piña', 15, 'mangonada')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTOS · BOYOS ============ -->
+<section id="boyos" class="white-sec">
+  <div class="container">
+    <div class="sec-title">
+      <h2>🍦 Boyos Cremositos</h2>
+      <p>Helados en barra hechos con leche, cremosos y llenos de sabor. ¡Elige tu favorito o pruébalos todos!</p>
+      <span class="badge-precio">$15 c/u</span>
+    </div>
+    <div class="grid grid-5">
+      <div class="card">
+        <img src="{% static 'images/fresa.jpg' %}" alt="Boyo de fresa">
+        <div class="card-body">
+          <h3>Fresa</h3>
+          <p>Cremosito clásico de fresa natural.</p>
+          <div class="precio">$15</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Fresa', 15, 'boyo')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/mazapan.jpg' %}" alt="Boyo de mazapán">
+        <div class="card-body">
+          <h3>Mazapán</h3>
+          <p>Suave sabor a cacahuate con toque de miel.</p>
+          <div class="precio">$15</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Mazapán', 15, 'boyo')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/oreo.jpg' %}" alt="Boyo de oreo">
+        <div class="card-body">
+          <h3>Oreo</h3>
+          <p>Galleta Oreo triturada en cremosa base de leche.</p>
+          <div class="precio">$15</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Oreo', 15, 'boyo')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/coco.jpg' %}" alt="Boyo de coco">
+        <div class="card-body">
+          <h3>Coco</h3>
+          <p>Tropical y refrescante, con coco rallado.</p>
+          <div class="precio">$15</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Coco', 15, 'boyo')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/galleta.jpg' %}" alt="Boyo de galleta María">
+        <div class="card-body">
+          <h3>Galleta María</h3>
+          <p>Cremoso sabor a galleta María.</p>
+          <div class="precio">$15</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Galleta María', 15, 'boyo')">🛒 Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN DEL CARRITO Y CHECKOUT COMPLETO -->
+<section class="seccion-carrito">
+    {% csrf_token %}
+    <h2>🛒 Tu Pedido Actual</h2>
+    
+    <!-- Datos del Cliente -->
+    <div class="grupo-input">
+        <label for="nombre-cliente">Nombre Completo:</label>
+        <input type="text" id="nombre-cliente" placeholder="Ej. Juan Pérez" required>
+    </div>
+
+    <div class="grupo-input">
+        <label for="telefono-cliente">Teléfono / WhatsApp:</label>
+        <input type="text" id="telefono-cliente" placeholder="Ej. 8311234567" required>
+    </div>
+
+    <div class="grupo-input">
+        <label for="direccion-cliente">Dirección de Entrega:</label>
+        <textarea id="direccion-cliente" placeholder="Calle, número, colonia y referencias..." rows="2" required></textarea>
+    </div>
+
+    <div class="grupo-input">
+        <label for="metodo-pago">Método de Pago:</label>
+        <select id="metodo-pago" onchange="toggleCamposTarjeta()">
+            <option value="Efectivo">Efectivo al recibir 💵</option>
+            <option value="Tarjeta">Tarjeta 💳</option>
+        </select>
+
+        <div id="datos-tarjeta" class="campos-tarjeta oculto">
+            <label for="numero-tarjeta">Número de Tarjeta (16 dígitos):</label>
+            <input type="text" id="numero-tarjeta" maxlength="19" placeholder="Ej. 4152 3130 0000 0000">
+
+            <div class="fila-tarjeta">
+                <div class="col-tarjeta">
+                    <label for="mes-tarjeta">Mes / Año (MM/AA):</label>
+                    <input type="text" id="mes-tarjeta" maxlength="5" placeholder="Ej. 08/28">
+                </div>
+                <div class="col-tarjeta">
+                    <label for="cvv-tarjeta">CVV:</label>
+                    <input type="password" id="cvv-tarjeta" maxlength="4" placeholder="Ej. 123">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de productos -->
+    <div id="lista-carrito">
+        <p class="carrito-vacio">Tu carrito está vacío.</p>
+    </div>
+    
+    <div class="total-box">
+        Total: <span id="total-carrito">$0.00</span>
+    </div>
+
+    <!-- Botón de Compra -->
+    <button type="button" class="btn-comprar" onclick="enviarPedidoBackend()">
+        Finalizar Compra 🛍️
+    </button>
+</section>
+
+{% if es_admin %}
+    <section class="container seccion-pedidos-admin">
+        <h3>Pedidos Registrados (Base de Datos)</h3>
+        <table class="tabla-pedidos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Pago</th>
+                    <th>Productos</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.usuario.username|default:"Invitado" }}</td>
+                    <td>{{ pedido.nombre_cliente }}</td>
+                    <td>{{ pedido.telefono }}</td>
+                    <td>{{ pedido.direccion }}</td>
+                    <td>{{ pedido.metodo_pago }}</td>
+                    <td>{{ pedido.productos_detalle }}</td>
+                    <td>${{ pedido.total }}</td>
+                    <td>
+                        <a href="{% url 'editar_pedido' pedido.id %}" class="enlace-editar-pedido">Editar</a>
+                        <a href="{% url 'eliminar_pedido' pedido.id %}" class="enlace-eliminar-pedido" onclick="return confirm('¿Seguro que deseas eliminar este pedido?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="tabla-pedidos-vacia">No hay pedidos registrados aún.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endif %}
+
+<footer>
+  <p><span class="brand">🥭 La Mangonada</span> · Colima #108, El Mante · Lunes a domingo de 12:00 pm a 8:00 pm</p>
+  <p style="margin-top:6px;opacity:.7;">Mangonadas y boyos a $15 · Hecho con ❤️ en El Mante</p>
+  <p style="margin-top:8px;"><a href="index.html">Inicio</a> · <a href="contactos.html">Contactos</a> · <a href="nosotros.html">Nosotros</a></p>
+</footer>
+
+
+
+<script>
+
+// NOTA: Se integró aquí la lógica del carrito y selección de extras de mangonadas
+// porque con cart.js hubo problemas constantes de caché y esta fue la manera más rápida de que
+// funcionara estable sin atorarse por caché.
+
+var carrito = [];
+var TOPPINGS_MANGONADA = ['Taj\u00edn', 'Lim\u00f3n', 'Chamoy', 'Ticko dulce'];
+
+function leerYLimpiarToppings() {
+    var checkboxes = document.querySelectorAll('.chip-checkbox');
+    var elegidos = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked && TOPPINGS_MANGONADA.indexOf(checkboxes[i].value) !== -1) {
+            elegidos.push(checkboxes[i].value);
+        }
+        checkboxes[i].checked = false;
+    }
+    return elegidos;
+}
+
+function agregarAlCarrito(nombre, precio, tipo) {
+    var esMangonada = (tipo === 'mangonada');
+    var extras = esMangonada ? leerYLimpiarToppings() : [];
+    var textoExtras = extras.length > 0 ? extras.join(', ') : '';
+    var clave = esMangonada
+        ? ('mangonada|' + nombre + '|' + textoExtras)
+        : ('boyo|' + nombre);
+
+    var existente = null;
+    for (var i = 0; i < carrito.length; i++) {
+        if (carrito[i].clave === clave) {
+            existente = carrito[i];
+            break;
+        }
+    }
+
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        var nombreEnvio = (esMangonada && extras.length > 0)
+            ? (nombre + ' (' + textoExtras + ')')
+            : nombre;
+
+        carrito.push({
+            clave: clave,
+            tipo: esMangonada ? 'mangonada' : 'boyo',
+            nombreBase: nombre,
+            nombre: nombreEnvio,
+            extras: extras,
+            precio: precio,
+            cantidad: 1
+        });
+    }
+
+    actualizarCarritoVisual();
+}
+
+function cambiarCantidad(clave, delta) {
+    for (var i = 0; i < carrito.length; i++) {
+        if (carrito[i].clave === clave) {
+            carrito[i].cantidad += delta;
+            if (carrito[i].cantidad <= 0) {
+                carrito.splice(i, 1);
+            }
+            break;
+        }
+    }
+    actualizarCarritoVisual();
+}
+
+function actualizarCarritoVisual() {
+    var lista = document.getElementById('lista-carrito');
+    var totalEl = document.getElementById('total-carrito');
+    if (!lista) return;
+
+    lista.innerHTML = '';
+
+    if (carrito.length === 0) {
+        lista.innerHTML = '<p class="carrito-vacio">Tu carrito est\u00e1 vac\u00edo.</p>';
+        if (totalEl) totalEl.innerText = '$0.00';
+        return;
+    }
+
+    var total = 0;
+    for (var i = 0; i < carrito.length; i++) {
+        var item = carrito[i];
+        var subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        var fila = document.createElement('div');
+        fila.className = 'item-carrito-visual';
+
+        var extraHtml = '';
+        if (item.tipo === 'mangonada') {
+            if (item.extras.length > 0) {
+                extraHtml = '<span class="extra-carrito-tag">Extra seleccionado: ' + item.extras.join(', ') + ' (agregada)</span>';
+            } else {
+                extraHtml = '<span class="extra-carrito-tag">Sin extra adicional (agregada)</span>';
+            }
+        }
+
+        fila.innerHTML =
+            '<div>' +
+                '<span>' + item.nombreBase + ' (x' + item.cantidad + ')</span>' +
+                extraHtml +
+            '</div>' +
+            '<div>' +
+                '<span class="item-carrito-subtotal">$' + subtotal.toFixed(2) + '</span>' +
+                '<button type="button" class="item-carrito-btn" onclick="cambiarCantidad(\'' + item.clave + '\', 1)">+</button>' +
+                '<button type="button" class="item-carrito-btn" onclick="cambiarCantidad(\'' + item.clave + '\', -1)">-</button>' +
+            '</div>';
+
+        lista.appendChild(fila);
+    }
+
+    if (totalEl) {
+        totalEl.innerText = '$' + total.toFixed(2);
+    }
+}
+
+function toggleCamposTarjeta() {
+    var metodo = document.getElementById('metodo-pago').value;
+    var contenedorTarjeta = document.getElementById('datos-tarjeta');
+    if (!contenedorTarjeta) return;
+
+    if (metodo === 'Tarjeta') {
+        contenedorTarjeta.classList.remove('oculto');
+    } else {
+        contenedorTarjeta.classList.add('oculto');
+    }
+}
+
+function mostrarAvisoSesion(mensaje) {
+    var avisoExistente = document.getElementById('aviso-sesion-compra');
+    if (avisoExistente) avisoExistente.remove();
+
+    var contenedor = document.querySelector('.seccion-carrito') || document.body;
+    var recuadro = document.createElement('div');
+    recuadro.id = 'aviso-sesion-compra';
+    recuadro.className = 'aviso-sesion-compra';
+
+    var textoAviso = mensaje || 'Debes iniciar sesi\u00f3n o registrarte antes para comprar.';
+
+    recuadro.innerHTML =
+        '<div class="aviso-sesion-header">' +
+            '<strong>' + textoAviso + '</strong>' +
+            '<button type="button" class="aviso-sesion-cerrar" onclick="this.closest(\'#aviso-sesion-compra\').remove()">&times;</button>' +
+        '</div>' +
+        '<div class="aviso-sesion-acciones">' +
+            '<a href="/login/" class="btn-aviso-login">Iniciar sesi\u00f3n</a>' +
+            '<a href="/registro/" class="btn-aviso-registro">Registrarse</a>' +
+        '</div>';
+
+    contenedor.appendChild(recuadro);
+}
+
+function mostrarBotonesWhatsApp(data) {
+    var panelExistente = document.getElementById('confirmacion-whatsapp-pedido');
+    if (panelExistente) panelExistente.remove();
+
+    var contenedor = document.querySelector('.seccion-carrito') || document.body;
+    var panel = document.createElement('div');
+    panel.id = 'confirmacion-whatsapp-pedido';
+    panel.style.cssText = 'margin-top: 16px; padding: 14px; border: 1px solid #25D366; border-radius: 8px; background: #f4fff8;';
+
+    var titulo = document.createElement('p');
+    titulo.style.cssText = 'margin: 0 0 10px 0; font-weight: bold;';
+    titulo.textContent = data.pedido_id
+        ? ('Pedido #' + data.pedido_id + ' registrado. Confirmar por WhatsApp:')
+        : 'Pedido registrado. Confirmar por WhatsApp:';
+    panel.appendChild(titulo);
+
+    var botonesContenedor = document.createElement('div');
+    botonesContenedor.style.cssText = 'display: flex; gap: 10px; flex-wrap: wrap;';
+
+    if (data.url_wa_cliente) {
+        var btnCliente = document.createElement('a');
+        btnCliente.href = data.url_wa_cliente;
+        btnCliente.target = '_blank';
+        btnCliente.rel = 'noopener noreferrer';
+        btnCliente.textContent = 'Enviar confirmaci\u00f3n a mi WhatsApp';
+        btnCliente.style.cssText = 'display: inline-block; padding: 10px 14px; background: #25D366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;';
+        botonesContenedor.appendChild(btnCliente);
+    }
+
+    if (data.url_wa_tienda) {
+        var btnTienda = document.createElement('a');
+        btnTienda.href = data.url_wa_tienda;
+        btnTienda.target = '_blank';
+        btnTienda.rel = 'noopener noreferrer';
+        btnTienda.textContent = 'Enviar copia a La Mangonada (Tienda)';
+        btnTienda.style.cssText = 'display: inline-block; padding: 10px 14px; background: #128C7E; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;';
+        botonesContenedor.appendChild(btnTienda);
+    }
+
+    panel.appendChild(botonesContenedor);
+    contenedor.appendChild(panel);
+}
+
+function enviarPedidoBackend() {
+    var nombre = document.getElementById('nombre-cliente').value.trim();
+    var telefono = document.getElementById('telefono-cliente').value.trim();
+    var direccion = document.getElementById('direccion-cliente').value.trim();
+    var metodoPago = document.getElementById('metodo-pago').value;
+
+    if (!nombre || !telefono || !direccion) {
+        alert('Por favor completa todos tus datos de env\u00edo (Nombre, Tel\u00e9fono y Direcci\u00f3n).');
+        return;
+    }
+
+    if (carrito.length === 0) {
+        alert('El carrito est\u00e1 vac\u00edo, agrega productos antes de comprar.');
+        return;
+    }
+
+    var terminacionTarjeta = '';
+
+    if (metodoPago === 'Tarjeta') {
+        var numTarjeta = document.getElementById('numero-tarjeta').value.replace(/\s+/g, '');
+        var mesTarjeta = document.getElementById('mes-tarjeta').value.trim();
+        var cvvTarjeta = document.getElementById('cvv-tarjeta').value.trim();
+
+        if (!/^\d{16}$/.test(numTarjeta)) {
+            alert('Ingresa un n\u00famero de tarjeta v\u00e1lido de 16 d\u00edgitos.');
+            return;
+        }
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(mesTarjeta)) {
+            alert('Ingresa la vigencia en formato MM/AA (ej. 08/28).');
+            return;
+        }
+        if (!/^\d{3,4}$/.test(cvvTarjeta)) {
+            alert('Ingresa un CVV v\u00e1lido de 3 o 4 d\u00edgitos.');
+            return;
+        }
+
+        terminacionTarjeta = numTarjeta.slice(-4);
+    }
+
+    var datosPedido = {
+        nombre_cliente: nombre,
+        telefono: telefono,
+        direccion: direccion,
+        metodo_pago: metodoPago === 'Tarjeta' ? ('Tarjeta (** ' + terminacionTarjeta + ')') : metodoPago,
+        productos: carrito,
+        total: document.getElementById('total-carrito').innerText
+    };
+
+    var csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+    var csrfToken = csrfInput ? csrfInput.value : '';
+
+    fetch('/guardar_pedido/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(datosPedido)
+    })
+    .then(function(response) {
+        return response.json().then(function(data) {
+            return { status: response.status, data: data };
+        });
+    })
+    .then(function(res) {
+        var status = res.status;
+        var data = res.data;
+
+        if (status === 401 || data.status === 'auth_required') {
+            mostrarAvisoSesion(data.message);
+            return;
+        }
+
+        if (status >= 200 && status < 300 && data.status === 'success') {
+            var avisoExistente = document.getElementById('aviso-sesion-compra');
+            if (avisoExistente) avisoExistente.remove();
+
+            alert('\u00a1Pedido realizado con \u00e9xito! Gracias por tu compra.');
+            carrito = [];
+            actualizarCarritoVisual();
+            document.getElementById('nombre-cliente').value = '';
+            document.getElementById('telefono-cliente').value = '';
+            document.getElementById('direccion-cliente').value = '';
+            document.getElementById('numero-tarjeta').value = '';
+            document.getElementById('mes-tarjeta').value = '';
+            document.getElementById('cvv-tarjeta').value = '';
+            toggleCamposTarjeta();
+
+            mostrarBotonesWhatsApp(data);
+        } else {
+            alert('Error al procesar: ' + (data.message || 'No se pudo completar el pedido.'));
+        }
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
+        alert('Ocurri\u00f3 un error de conexi\u00f3n con el servidor.');
+    });
+}
+</script>
+</body>
+</html>

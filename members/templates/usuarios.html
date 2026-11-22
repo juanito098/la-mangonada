@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios Registrados | La Mangonada</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    {% if es_admin %}
+    <section class="container seccion-usuarios">
+        <h2>Usuarios Registrados</h2>
+        <table class="tabla-usuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Correo</th>
+                    <th>Fecha de registro</th>
+                    <th>Rol</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.email|default:"-" }}</td>
+                    <td>{{ u.date_joined|date:"d/m/Y H:i" }}</td>
+                    <td>
+                        {% if u.is_superuser %}Superusuario{% elif u.is_staff %}Staff{% else %}Cliente{% endif %}
+                    </td>
+                    <td>
+                        {% if u != request.user %}
+                            <a href="{% url 'eliminar_usuario' u.id %}" class="enlace-eliminar-usuario" onclick="return confirm('¿Seguro que deseas eliminar a {{ u.username }}?');">Eliminar</a>
+                        {% else %}
+                            <span>Tu cuenta</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="tabla-usuarios-vacia">No hay usuarios registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="acciones-volver-usuarios">
+            <a href="{% url 'index' %}">Volver al inicio</a>
+        </div>
+    </section>
+    {% endif %}
+</body>
+</html>

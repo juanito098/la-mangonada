@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros | La Mangonada · Hecho con cariño en El Mante</title>
+<meta name="description" content="La Mangonada: negocio local orgullosamente manteño, dedicados a preparar mangonadas y boyos con ingredientes frescos en Colima #108, El Mante, Tamaulipas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+
+
+
+
+
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="nosotros.html" class="active">Nosotros</a>
+
+{% if user.is_authenticated %}
+    <span>Hola, {{ user.username }}</span>
+    <a href="{% url 'logout' %}">Salir</a>
+{% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión</a>
+{% endif %}
+
+{% if es_admin %}
+    <a href="{% url 'lista_usuarios' %}">Usuarios</a>
+{% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============ NOSOTROS ============ -->
+<section id="nosotros" class="alt" style="padding-top:60px;">
+  <div class="container nosotros-grid">
+    <img src="{% static  'images/mangada.jpg' %}" alt="La Mangonada preparando mangonadas">
+    <div>
+      <h2>💛 Hecho con cariño en El Mante</h2>
+      <p>En <strong>La Mangonada</strong> creemos que los mejores antojos se hacen con ingredientes frescos y mucho sabor. Cada mangonada se prepara al momento: fruta, tajín, limón, chamoy y su ticko dulce, como a ti te gusta.</p>
+      <p>Nuestros boyos son cremositos y de sabores para toda la familia. Somos un negocio local, orgullosamente manteño, y nos encanta ver salir a cada cliente con una sonrisa (y las manos un poquito enchiladas 😄).</p>
+
+      <ul class="info-list">
+        <li>
+          <span class="ico">📍</span>
+          <div><strong>Dirección:</strong> Colima #108, El Mante, Tamaulipas</div>
+        </li>
+        <li>
+          <span class="ico">🏙️</span>
+          <div><strong>Ciudad:</strong> El Mante, Tamaulipas, México</div>
+        </li>
+        <li>
+          <span class="ico">📧</span>
+          <div><strong>Correo:</strong> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=castleclashyeti@gmail.com&su=Hola%20La%20Mangonada&body=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20" target="_blank" rel="noopener" style="color:var(--mango-dark);font-weight:700;">castleclashyeti@gmail.com (Click para escribir)</a></div>
+        </li>
+        <li>
+          <span class="ico">📱</span>
+          <div><strong>WhatsApp:</strong> <a href="https://wa.me/528311757955" target="_blank" rel="noopener" style="color:var(--mango-dark);font-weight:700;">831 175 7955</a></div>
+        </li>
+        <li>
+          <span class="ico">🕛</span>
+          <div><strong>Horario:</strong> Lunes a domingo, 12:00 pm a 8:00 pm</div>
+        </li>
+      </ul>
+
+      <div class="cta-final" style="text-align:left;margin-top:24px;">
+        <a class="btn btn-menu" href="productos.html">Conoce el menú</a>
+        <a class="btn btn-wa" style="margin-left:8px;" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener">💬 Haz tu pedido</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN NUESTRO EQUIPO CON CLASES PARA EL CSS -->
+<section class="equipo-seccion">
+    <h2>❤️ Nuestro Equipo de Trabajo</h2>
+    <p>Conoce a las personas encargadas de preparar las mejores mangonadas en El Mante.</p>
+
+    <div class="equipo-grid">
+        {% for e in empleados %}
+        <div class="equipo-card">
+            <div class="avatar-box">👤</div>
+            <h3>{{ e.nombre }}</h3>
+            <span class="edad-tag">{{ e.edad }} años</span>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+
+
+
+<footer>
+  <p><span class="brand">🥭 La Mangonada</span> · Colima #108, El Mante · Lunes a domingo de 12:00 pm a 8:00 pm</p>
+  <p style="margin-top:6px;opacity:.7;">Mangonadas y boyos a $15 · Hecho con ❤️ en El Mante</p>
+  <p style="margin-top:8px;"><a href="index.html">Inicio</a> · <a href="contactos.html">Contactos</a></p>
+</footer>
+
+
+
+
+
+<a class="wa-float" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">💬</a>
+
+
+</body>
+</html>

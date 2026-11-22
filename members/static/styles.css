@@ -1,0 +1,830 @@
+/* ============================================
+   La Mangonada · Estilos compartidos
+   ============================================ */
+:root{
+  --mango:#ff8a00;
+  --mango-dark:#e56e00;
+  --amarillo:#ffc93c;
+  --limon:#7fbf3f;
+  --chamoy:#d63c2f;
+  --crema:#fff8ef;
+  --texto:#3a2a1a;
+  --whatsapp:#25d366;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--crema);color:var(--texto);line-height:1.6;}
+h1,h2,h3,h4,.brand{font-family:'Baloo 2',cursive;}
+img{display:block;max-width:100%;}
+a{color:inherit;}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,248,239,.94);backdrop-filter:blur(10px);
+  box-shadow:0 2px 14px rgba(0,0,0,.07);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.brand{font-size:1.5rem;font-weight:800;color:var(--mango-dark);text-decoration:none;}
+.brand span{color:var(--chamoy);}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;}
+.nav-links a{
+  text-decoration:none;color:var(--texto);font-weight:700;font-size:.95rem;
+  padding:8px 16px;border-radius:999px;transition:.2s;
+}
+.nav-links a:hover{background:var(--amarillo);color:#5a3a00;}
+.nav-links a.active{background:var(--mango);color:#fff;}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:88vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;
+  max-width:1100px;margin:0 auto;padding:40px 20px;gap:40px;
+}
+.hero-text .tag{
+  display:inline-block;background:var(--amarillo);color:#5a3a00;
+  font-weight:800;padding:6px 16px;border-radius:999px;font-size:.85rem;
+  letter-spacing:.5px;margin-bottom:16px;
+}
+.hero h1{font-size:clamp(2.6rem,6vw,4.2rem);line-height:1.05;color:var(--mango-dark);}
+.hero h1 em{font-style:normal;color:var(--chamoy);}
+.hero p{font-size:1.15rem;margin:18px 0 26px;max-width:46ch;}
+.hero-img{
+  border-radius:28px;overflow:hidden;box-shadow:0 24px 50px rgba(229,110,0,.28);
+  transform:rotate(2deg);
+}
+.hero-img img{width:100%;height:520px;object-fit:cover;}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:1.05rem;
+  padding:14px 30px;border-radius:999px;text-decoration:none;transition:.2s;border:none;cursor:pointer;
+}
+.btn-wa{background:var(--whatsapp);color:#fff;box-shadow:0 10px 24px rgba(37,211,102,.4);}
+.btn-wa:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(37,211,102,.5);}
+.btn-menu{background:#fff;color:var(--mango-dark);border:2px solid var(--mango);margin-left:10px;}
+.btn-menu:hover{background:var(--amarillo);}
+
+/* ===== SECCIONES ===== */
+section{padding:80px 20px;}
+.container{max-width:1100px;margin:0 auto;}
+.sec-title{text-align:center;margin-bottom:14px;}
+.sec-title h2{font-size:clamp(2rem,4.5vw,2.9rem);color:var(--mango-dark);}
+.sec-title p{color:#7a5c40;max-width:60ch;margin:0 auto;}
+.badge-precio{
+  display:inline-block;background:var(--chamoy);color:#fff;font-family:'Baloo 2',cursive;
+  font-weight:700;padding:4px 18px;border-radius:999px;font-size:1.05rem;margin-top:10px;
+}
+
+.grid{display:grid;gap:26px;margin-top:44px;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-5{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+
+.card{
+  background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);transition:.25s;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(229,110,0,.18);}
+.card img{width:100%;height:280px;object-fit:cover;}
+.grid-5 .card img{height:210px;}
+.card-body{padding:18px 20px 22px;}
+.card-body h3{font-size:1.25rem;color:var(--texto);}
+.card-body p{font-size:.92rem;color:#7a5c40;margin-top:4px;}
+.card-body .precio{
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:1.3rem;color:var(--mango-dark);margin-top:8px;
+}
+.card-body .precio span{font-size:.8rem;color:#a98;font-family:'Nunito';font-weight:600;}
+
+.alt{background:linear-gradient(180deg,#fff3df,#ffe9c7);}
+.white-sec{background:#fff;}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px;}
+.chip{
+  background:#fff;border:2px dashed var(--mango);color:var(--mango-dark);
+  font-weight:700;padding:8px 18px;border-radius:999px;font-size:.9rem;
+}
+
+/* ===== NOSOTROS ===== */
+.nosotros-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center;
+}
+.nosotros-grid img{border-radius:24px;height:440px;width:100%;object-fit:cover;box-shadow:0 18px 40px rgba(0,0,0,.12);}
+.nosotros-grid h2{font-size:clamp(1.8rem,4vw,2.4rem);color:var(--mango-dark);margin-bottom:16px;}
+.nosotros-grid p{margin-bottom:12px;}
+.info-list{margin-top:18px;}
+.info-list li{
+  list-style:none;padding:10px 14px;background:#fff;border-radius:14px;margin-bottom:10px;
+  border-left:4px solid var(--mango);display:flex;align-items:center;gap:12px;
+  box-shadow:0 4px 14px rgba(0,0,0,.04);
+}
+.info-list li .ico{font-size:1.4rem;}
+.info-list li strong{color:var(--mango-dark);font-family:'Baloo 2',cursive;}
+
+/* ===== SERVICIOS ===== */
+.serv-card{
+  background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.07);transition:.25s;border:2px solid transparent;
+  text-align:center;
+}
+.serv-card:hover{transform:translateY(-6px);border-color:var(--mango);}
+.serv-card .serv-img{width:100%;height:170px;object-fit:cover;}
+.serv-card .serv-body{padding:20px 24px 24px;}
+.serv-card .ico{
+  font-size:2.4rem;display:inline-flex;width:62px;height:62px;border-radius:50%;
+  align-items:center;justify-content:center;background:var(--crema);
+  margin:-42px auto 10px;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.serv-card h3{font-size:1.3rem;color:var(--mango-dark);margin-bottom:8px;}
+.serv-card p{color:#7a5c40;font-size:.95rem;}
+.serv-card .tag-info{
+  display:inline-block;margin-top:14px;background:var(--amarillo);color:#5a3a00;
+  font-weight:700;padding:5px 14px;border-radius:999px;font-size:.8rem;
+}
+.serv-cta{
+  margin-top:50px;background:linear-gradient(135deg,var(--mango-dark),var(--chamoy));
+  color:#fff;border-radius:24px;padding:32px;text-align:center;
+  box-shadow:0 18px 40px rgba(214,60,47,.25);
+}
+.serv-cta h3{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:8px;color:#fff;}
+.serv-cta p{margin-bottom:20px;opacity:.95;}
+.serv-cta .btn{background:#fff;color:var(--mango-dark);}
+.serv-cta .btn:hover{background:var(--amarillo);}
+
+/* ===== CONTACTO ===== */
+.contacto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:40px;}
+.contact-card{
+  background:var(--crema);border-radius:20px;padding:26px;text-align:center;
+  border:1px solid #f3e2c8;transition:.2s;
+}
+.contact-card:hover{transform:translateY(-4px);border-color:var(--mango);}
+.contact-card .ico{font-size:2.2rem;}
+.contact-card h3{margin:10px 0 6px;color:var(--mango-dark);}
+.contact-card p{font-size:.98rem;}
+.contact-card a{color:var(--texto);font-weight:700;text-decoration:none;word-break:break-all;}
+.contact-card a:hover{color:var(--whatsapp);}
+.cta-final{text-align:center;margin-top:44px;}
+
+footer{
+  background:var(--texto);color:#f7e9d2;text-align:center;padding:26px 20px;font-size:.9rem;
+}
+footer .brand{color:var(--amarillo);}
+footer a{color:#ffc93c;text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+
+/* Botón flotante WhatsApp */
+.wa-float{
+  position:fixed;bottom:22px;right:22px;z-index:200;
+  width:60px;height:60px;border-radius:50%;background:var(--whatsapp);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px rgba(37,211,102,.5);text-decoration:none;font-size:1.8rem;
+  transition:.2s;
+}
+.wa-float:hover{transform:scale(1.1);}
+
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:30px;}
+  .hero-img img{height:380px;}
+  .grid-2,.grid-3,.nosotros-grid{grid-template-columns:1fr;}
+  .nav-inner{justify-content:center;}
+  .btn-menu{margin-left:0;margin-top:10px;}
+}
+
+
+
+.contacto-container {
+    max-width: 450px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #ffffff;
+    border: 2px solid #ffe0b2;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.contacto-container h2 {
+    color: #ff5722;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.contacto-container p {
+    color: #666;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.btn-enviar {
+    width: 100%;
+    background: #ff5722;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background: #e64a19;
+}
+
+
+
+
+
+
+
+
+.equipo-seccion {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.equipo-seccion h2 {
+    font-size: 2rem;
+    color: #ff5722;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.equipo-seccion p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.equipo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.equipo-card {
+    background: #ffffff;
+    border: 2px solid #ffe0b2;
+    border-radius: 12px;
+    padding: 20px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.equipo-card .avatar-box {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #512da8;
+}
+
+.equipo-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.equipo-card .edad-tag {
+    display: inline-block;
+    margin-top: 6px;
+    background-color: #fff3e0;
+    color: #d84315;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+
+/* ==========================================
+   ESTILOS PARA EL CARRITO DE COMPRAS
+   ========================================== */
+.btn-comprar {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background-color: #e64a19;
+}
+
+/* Seccion contenedor del carrito */
+.seccion-carrito {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border: 2px solid #ffe0b2;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.seccion-carrito h2 {
+    color: #ff5722;
+    margin-top: 0;
+}
+
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ffe0b2;
+}
+
+.btn-eliminar {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.total-box {
+    margin-top: 15px;
+    text-align: right;
+    font-size: 1.3rem;
+    color: #d84315;
+}
+
+
+
+
+/* ================================================= */
+/* ESTILOS EXTRAS PARA CHIPS INTERACTIVOS Y CARRITO  */
+/* ================================================= */
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.chip-checkbox {
+  display: none;
+}
+
+.chip-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  background-color: #fff3e0;
+  border: 2px solid #ffb74d;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e65100;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.chip-checkbox:checked + .chip-label {
+  background-color: #ff9800;
+  color: white;
+  border-color: #f57c00;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+}
+
+.seccion-carrito {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-box {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.btn-enviar-pedido {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.btn-enviar-pedido:hover {
+  background-color: #1b5e20;
+}
+
+
+
+
+
+
+
+/* ========================================== */
+/* ESTILOS DE LA SECCIÓN DEL CARRITO Y COMPRA */
+/* ========================================== */
+.seccion-carrito {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 30px auto;
+    text-align: left;
+    font-family: inherit;
+}
+
+.seccion-carrito h2 {
+    color: #333333;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.grupo-input-nombre {
+    margin-bottom: 15px;
+}
+
+.grupo-input-nombre label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.grupo-input-nombre input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.grupo-input-nombre input:focus {
+    border-color: #2e7d32;
+}
+
+#lista-carrito {
+    min-height: 50px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.carrito-vacio {
+    color: #777555;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.total-box {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222222;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+#total-carrito {
+    color: #2e7d32;
+}
+
+.btn-comprar {
+    width: 100%;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-comprar:hover {
+    background: #256428;
+}
+
+.btn-comprar:active {
+    transform: scale(0.98);
+}
+
+
+.grupo-input select,
+.grupo-input textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    background: #fff;
+    font-family: inherit;
+    margin-bottom: 15px;
+}
+
+.grupo-input select:focus,
+.grupo-input textarea:focus {
+    border-color: #2e7d32;
+}
+
+
+
+
+
+
+/* Estilos para el contenedor del carrito y checkout */
+.seccion-carrito {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: 30px auto;
+    font-family: inherit;
+}
+
+.seccion-carrito h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 22px;
+    text-align: center;
+}
+
+/* Grupos de inputs del formulario */
+.grupo-input {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.grupo-input label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.grupo-input input,
+.grupo-input select,
+.grupo-input textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus,
+.grupo-input textarea:focus {
+    border-color: #2e7d32;
+    background: #fff;
+}
+
+/* Lista de productos y totales */
+#lista-carrito {
+    margin: 15px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.carrito-vacio {
+    color: #777;
+    text-align: center;
+    font-style: italic;
+}
+
+.total-box {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin: 15px 0;
+    color: #222;
+}
+
+/* Botón de compra */
+.btn-comprar {
+    width: 100%;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background-color: #1b5e20;
+}
+
+
+
+/* Estilos del carrito en cart.js */
+.item-carrito-visual {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.item-carrito-subtotal {
+    margin-right: 10px;
+}
+
+.item-carrito-btn {
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+/* Recuadro de aviso para iniciar sesión o registrarse al comprar */
+.aviso-sesion-compra {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+.aviso-sesion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.aviso-sesion-cerrar {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #664d03;
+}
+
+.aviso-sesion-acciones {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-aviso-login {
+    padding: 6px 12px;
+    background-color: #212529;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-aviso-registro {
+    padding: 6px 12px;
+    background-color: #fff;
+    color: #212529;
+    border: 1px solid #212529;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+
+/* Sección de usuarios registrados (admin) */
+.seccion-usuarios {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.tabla-usuarios {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.tabla-usuarios thead tr {
+    background-color: #f2f2f2;
+}
+
+.tabla-usuarios-vacia {
+    text-align: center;
+}
+
+.enlace-eliminar-usuario {
+    color: red;
+}
+
+.acciones-volver-usuarios {
+    margin-top: 20px;
+}
+
+
+/* Campos de pago con tarjeta en productos.html */
+.oculto {
+    display: none;
+}
+
+.campos-tarjeta {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.campos-tarjeta label {
+    display: block;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.campos-tarjeta input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.fila-tarjeta {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.col-tarjeta {
+    flex: 1;
+}

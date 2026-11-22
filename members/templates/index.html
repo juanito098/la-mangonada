@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Mangonada | Mangonadas y Boyos en El Mante</title>
+<meta name="description" content="La Mangonada: mangonadas de mango y piña con tajín, limón, chamoy y ticko dulce. Boyos de fresa, mazapán, oreo, coco y galleta María. Todo a $15. Colima #108, El Mante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="nosotros.html">Nosotros</a>
+
+{% if user.is_authenticated %}
+    <span>Hola, {{ user.username }}</span>
+    <a href="{% url 'logout' %}">Salir</a>
+{% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión</a>
+{% endif %}
+
+{% if es_admin %}
+    <a href="{% url 'lista_usuarios' %}">Usuarios</a>
+{% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============ INICIO ============ -->
+<header class="hero" id="inicio">
+  <div class="hero-text">
+    <span class="tag">📍 Colima #108, El Mante</span>
+    <h1>El sabor que <em>refresca</em> a El Mante 🥭</h1>
+    <p>Mangonadas preparadas al momento con tajín, limón, chamoy y ticko dulce, y boyos cremositos de tus sabores favoritos. Todo a <strong>$15 pesos</strong>.</p>
+    <a class="btn btn-wa" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener">💬 Pide por WhatsApp</a>
+    <a class="btn btn-menu" href="productos.html">Ver el menú</a>
+  </div>
+  <div class="hero-img">
+    <img src="{% static  'images/Mangonadass.jpg' %}" alt="Mangonada de mango con chamoy y tajín">
+  </div>
+</header>
+
+<!-- Vista rápida -->
+<section style="padding:60px 20px;">
+  <div class="container">
+    <div class="sec-title">
+      <h2>🍴 ¿Qué se te antoja hoy?</h2>
+      <p>Explora nuestros productos y servicios, y haz tu pedido por WhatsApp.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:30px;">
+      <a href="productos.html" class="card" style="text-decoration:none;">
+        <img src="{% static  'images/mangonada2.jpg' %}" alt="Productos">
+        <div class="card-body">
+          <h3>🥭 Productos</h3>
+          <p>Mangonadas y boyos cremositos. $15 c/u.</p>
+          <div class="precio">Ver menú →</div>
+        </div>
+      </a>
+      <a href="servicios.html" class="card" style="text-decoration:none;">
+        <img src="{% static  'images/moto.jpg' %}" alt="Moto de delivery tipo DiDi con caja térmica - Servicios a domicilio">
+        <div class="card-body">
+          <h3>🎉 Servicios</h3>
+          <p>Domicilio, eventos y pedidos especiales.</p>
+          <div class="precio">Ver servicios →</div>
+        </div>
+      </a>
+      <a href="contactos.html" class="card" style="text-decoration:none;">
+        <img src="{% static  'images/contactame.jpg' %}" alt="Contactos">
+        <div class="card-body">
+          <h3>💬 Contactos</h3>
+          <p>WhatsApp, dirección, horario y correo.</p>
+          <div class="precio">Contáctanos →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><span class="brand">🥭 La Mangonada</span> · Colima #108, El Mante · Lunes a domingo de 12:00 pm a 8:00 pm</p>
+  <p style="margin-top:6px;opacity:.7;">Mangonadas y boyos a $15 · Hecho con ❤️ en El Mante</p>
+  <p style="margin-top:8px;"><a href="contactos.html">Contactos</a> · <a href="nosotros.html">Nosotros</a></p>
+
+
+  <!-- AQUÍ AGREGAS EL ENLACE DISCRETO PARA EL LOGIN -->
+    <p style="margin-top: 10px; font-size: 0.8rem;">
+        <a href="/admin/" target="_blank" style="color: #888; text-decoration: none;">🔐 Acceso al Sistema (Login)</a>
+    </p>
+
+</footer>
+
+<!-- Botón flotante WhatsApp -->
+<a class="wa-float" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20hacer%20un%20pedido%20🥭" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">💬</a>
+
+</body>
+</html>
