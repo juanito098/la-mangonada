@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Tu modelo original de empleado
+# Tu modelo de empleado / postulantes
 class empleado(models.Model):
     nombre = models.CharField(max_length=100)
     edad = models.IntegerField()
     correo = models.EmailField(blank=True, null=True)
+    en_nosotros = models.BooleanField(default=True)
 
     def _str_(self):
         return self.nombre
