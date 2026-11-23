@@ -81,8 +81,7 @@
 </div>
 {% endif %}
 
-{% if es_admin %}
-   <!-- SECCIÓN FORMULARIO CON ESTILOS CSS LIMPIOS (SOLO ADMIN) -->
+   <!-- SECCIÓN FORMULARIO CON ESTILOS CSS LIMPIOS (VISIBLE PARA TODOS) -->
 <div class="contacto-container">
     <h2>📝 Trabaja en La Mangonada</h2>
     <p>¿Quieres formar parte del equipo? Déjanos tus datos y postúlate.</p>
@@ -109,6 +108,7 @@
     </form>
 </div>
 
+{% if es_admin %}
 <hr style="margin: 30px 0;">
 
 <!-- TABLA PARA CONSULTAR, MODIFICAR Y ELIMINAR -->
