@@ -73,20 +73,16 @@
       </div>
     </div>
 
+{% if messages %}
+<div style="margin: 20px 0;">
+    {% for message in messages %}
+    <p style="padding: 10px; border-radius: 6px; background: #fff3cd; color: #333;">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
 
-
-   {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Trabaja con nosotros | La Mangonada</title>
-    <!-- Vinculamos tu archivo CSS externo -->
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
-
-   <!-- SECCIÓN FORMULARIO CON ESTILOS CSS LIMPIOS -->
+{% if es_admin %}
+   <!-- SECCIÓN FORMULARIO CON ESTILOS CSS LIMPIOS (SOLO ADMIN) -->
 <div class="contacto-container">
     <h2>📝 Trabaja en La Mangonada</h2>
     <p>¿Quieres formar parte del equipo? Déjanos tus datos y postúlate.</p>
@@ -104,24 +100,16 @@
             <input type="number" id="edad" name="edad" required placeholder="Ej. 20">
         </div>
 
-
-<div class="form-group">
-    <label for="correo">Correo electrónico:</label>
-    <input type="email" id="correo" name="correo" required placeholder="Ej. correo@mail.com">
-</div>
-
-
+        <div class="form-group">
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" name="correo" required placeholder="Ej. correo@mail.com">
+        </div>
 
         <button type="submit" class="btn-enviar">Enviar Solicitud</button>
     </form>
 </div>
 
-
-
-
 <hr style="margin: 30px 0;">
-
-{% if es_admin %}
 
 <!-- TABLA PARA CONSULTAR, MODIFICAR Y ELIMINAR -->
 <h3>Postulantes Registrados (Base de Datos)</h3>
@@ -131,7 +119,7 @@
             <th style="padding: 8px;">ID</th>
             <th style="padding: 8px;">Nombre</th>
             <th style="padding: 8px;">Edad</th>
-            <th style="padding: 8px;">Correo</th> <!-- AQUÍ VA -->
+            <th style="padding: 8px;">Correo</th>
             <th style="padding: 8px;">Acciones</th>
         </tr>
     </thead>
@@ -141,7 +129,7 @@
             <td style="padding: 8px;">{{ persona.id }}</td>
             <td style="padding: 8px;">{{ persona.nombre }}</td>
             <td style="padding: 8px;">{{ persona.edad }}</td>
-            <td style="padding: 8px;">{{ persona.correo }}</td> <!-- Y AQUÍ VA EL DATO -->
+            <td style="padding: 8px;">{{ persona.correo }}</td>
             <td style="padding: 8px;">
                 <a href="{% url 'editar_candidato' persona.id %}" style="color: blue; margin-right: 10px;">Editar ✏️</a>
                 <a href="{% url 'eliminar_candidato' persona.id %}" onclick="return confirm('¿Seguro que deseas eliminar este registro?');" style="color: red;">Eliminar ❌</a>
@@ -154,9 +142,7 @@
         {% endfor %}
     </tbody>
 </table>
-
 {% endif %}
-
 
     <div class="cta-final">
       <a class="btn btn-wa" href="https://wa.me/528311757955?text=Hola%20La%20Mangonada%2C%20quiero%20informaci%C3%B3n%20%F0%9F%92%AC" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
