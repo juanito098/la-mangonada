@@ -74,7 +74,13 @@ def index(request):
 
 
 def contactos(request):
+    admin_activo = es_admin(request.user)
+
     if request.method == 'POST':
+        if not admin_activo:
+            messages.error(request, 'Solo el administrador puede registrar desde este formulario.')
+            return redirect('contactos')
+
         nombre_ingresado = request.POST.get('nombre')
         edad_ingresada = request.POST.get('edad')
         correo_ingresado = request.POST.get('correo')
@@ -84,10 +90,11 @@ def contactos(request):
                 nombre=nombre_ingresado,
                 edad=edad_ingresada,
                 correo=correo_ingresado,
+                en_nosotros=False,
             )
+            messages.success(request, 'Registro guardado correctamente.')
             return redirect('contactos')
 
-    admin_activo = es_admin(request.user)
     candidatos = empleado.objects.all() if admin_activo else None
     return render(
         request,
@@ -167,7 +174,7 @@ def servicios(request):
 
 
 def nosotros(request):
-    mis_empleados = empleado.objects.all()
+    mis_empleados = empleado.objects.filter(en_nosotros=True)
     contexto = {
         'empleados': mis_empleados,
     }
