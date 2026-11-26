@@ -828,3 +828,130 @@ footer a:hover{text-decoration:underline;}
 .col-tarjeta {
     flex: 1;
 }
+
+
+/* ================================================= */
+/* ESTILOS CRUD DE PRODUCTOS (SOLO SUPERUSUARIO)    */
+/* ================================================= */
+.admin-producto-box {
+    background: #ffffff;
+    border: 2px solid #ffb74d;
+    border-radius: 16px;
+    padding: 22px;
+    margin: 24px 0 30px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.admin-producto-box h3 {
+    color: var(--mango-dark);
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+}
+
+.form-producto-admin .grid-form-producto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.form-producto-admin .campo-prod {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-producto-admin .campo-prod label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: var(--texto);
+}
+
+.form-producto-admin .campo-prod input,
+.form-producto-admin .campo-prod select {
+    padding: 10px 12px;
+    border: 1px solid #d4b895;
+    border-radius: 8px;
+    background: #fffaf2;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.btn-guardar-producto {
+    background: var(--mango-dark);
+    color: #fff;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-guardar-producto:hover {
+    background: var(--chamoy);
+    transform: translateY(-1px);
+}
+
+.admin-card-acciones {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-card-acciones form {
+    margin: 0;
+}
+
+.btn-admin-editar {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #fff3e0;
+    color: #b24700;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-admin-editar:hover {
+    background: #ffe0b2;
+}
+
+.btn-admin-eliminar {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-admin-eliminar:hover {
+    background: #ffcdd2;
+}
+
+.mensajes-django-box {
+    max-width: 1100px;
+    margin: 16px auto 0;
+    padding: 0 20px;
+}
+
+.mensaje-django-item {
+    background: #fff3cd;
+    color: #5a3a00;
+    border: 1px solid #ffc93c;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
