@@ -145,6 +145,10 @@ STORAGES = {
     },
 }
 
+# Media files (Imágenes subidas de productos)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Email (consola para evitar errores de autenticación SMTP en desarrollo y Render sin SMTP)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
