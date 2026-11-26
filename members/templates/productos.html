@@ -10,21 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
-<style>
-  #mangonadas .card img {
-    width: 100%;
-    height: 230px;
-    object-fit: fill;
-    object-position: center;
-    display: block;
-  }
-  .extra-carrito-tag {
-    display: block;
-    font-size: 0.85rem;
-    color: #5a3a00;
-    margin-top: 2px;
-  }
-</style>
 </head>
 <body>
 
@@ -54,6 +39,58 @@
     </div>
   </div>
 </nav>
+
+{% if messages %}
+<div class="mensajes-django-box">
+  {% for message in messages %}
+    <div class="mensaje-django-item">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if es_superusuario %}
+<section id="panel-superusuario" style="padding-top: 32px; padding-bottom: 10px;">
+  <div class="container">
+    <div class="admin-producto-box">
+      <h3>➕ Agregar Nuevo Producto (Solo Superusuario)</h3>
+      <form method="POST" action="{% url 'agregar_producto' %}" enctype="multipart/form-data" class="form-producto-admin">
+        {% csrf_token %}
+        <div class="grid-form-producto">
+          <div class="campo-prod">
+            <label for="id_nombre_prod">Nombre del producto</label>
+            <input type="text" id="id_nombre_prod" name="nombre" placeholder="Ej. Boyo de Chocolate" required>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_categoria_prod">Sección / Categoría</label>
+            <select id="id_categoria_prod" name="categoria" required>
+              <option value="boyo">Boyos Cremositos</option>
+              <option value="mangonada">Mangonadas</option>
+            </select>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_precio_prod">Precio ($)</label>
+            <input type="number" id="id_precio_prod" name="precio" step="0.01" min="0.50" value="15.00" required>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_imagen_prod">Imagen del producto</label>
+            <input type="file" id="id_imagen_prod" name="imagen" accept="image/*" required>
+          </div>
+        </div>
+
+        <div class="campo-prod" style="margin-bottom: 14px;">
+          <label for="id_descripcion_prod">Descripción breve (opcional)</label>
+          <input type="text" id="id_descripcion_prod" name="descripcion" placeholder="Ej. Cremoso sabor a chocolate con trozos.">
+        </div>
+
+        <button type="submit" class="btn-guardar-producto">💾 Guardar Producto</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <!-- ============ PRODUCTOS · MANGONADAS ============ -->
 <section id="mangonadas" class="alt" style="padding-top:60px;">
@@ -101,6 +138,32 @@
           <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Mangonada de Piña', 15, 'mangonada')">🛒 Agregar al carrito</button>
         </div>
       </div>
+
+      {% for prod in mangonadas_db %}
+      <div class="card">
+        {% if prod.imagen %}
+          <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}">
+        {% endif %}
+        <div class="card-body">
+          <h3>{{ prod.nombre }}</h3>
+          {% if prod.descripcion %}
+            <p>{{ prod.descripcion }}</p>
+          {% endif %}
+          <div class="precio">${{ prod.precio }} <span>pesos</span></div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('{{ prod.nombre|escapejs }}', {{ prod.precio }}, 'mangonada')">🛒 Agregar al carrito</button>
+
+          {% if es_superusuario %}
+          <div class="admin-card-acciones">
+            <a href="{% url 'editar_producto' prod.id %}" class="btn-admin-editar">✏️ Editar</a>
+            <form method="POST" action="{% url 'eliminar_producto' prod.id %}" onsubmit="return confirm('¿Eliminar este producto?');">
+              {% csrf_token %}
+              <button type="submit" class="btn-admin-eliminar">🗑️ Eliminar</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -159,6 +222,32 @@
           <button type="button" class="btn-comprar" onclick="agregarAlCarrito('Galleta María', 15, 'boyo')">🛒 Agregar al carrito</button>
         </div>
       </div>
+
+      {% for prod in boyos_db %}
+      <div class="card">
+        {% if prod.imagen %}
+          <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}">
+        {% endif %}
+        <div class="card-body">
+          <h3>{{ prod.nombre }}</h3>
+          {% if prod.descripcion %}
+            <p>{{ prod.descripcion }}</p>
+          {% endif %}
+          <div class="precio">${{ prod.precio }}</div>
+          <button type="button" class="btn-comprar" onclick="agregarAlCarrito('{{ prod.nombre|escapejs }}', {{ prod.precio }}, 'boyo')">🛒 Agregar al carrito</button>
+
+          {% if es_superusuario %}
+          <div class="admin-card-acciones">
+            <a href="{% url 'editar_producto' prod.id %}" class="btn-admin-editar">✏️ Editar</a>
+            <form method="POST" action="{% url 'eliminar_producto' prod.id %}" onsubmit="return confirm('¿Eliminar este producto?');">
+              {% csrf_token %}
+              <button type="submit" class="btn-admin-eliminar">🗑️ Eliminar</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
