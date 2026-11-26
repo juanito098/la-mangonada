@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Pedido, empleado
+from .models import Pedido, Producto, empleado
 
 
 TELEFONO_TIENDA = '5218311836953'  # <-- Pon aquí tu número de WhatsApp con código de país
@@ -67,6 +67,10 @@ def enviar_confirmacion_correo(asunto, cuerpo, correo_usuario=None):
 
 def es_admin(user):
     return user.is_authenticated and (user.is_superuser or user.is_staff)
+
+
+def es_superusuario(user):
+    return user.is_authenticated and user.is_superuser
 
 
 def index(request):
@@ -128,15 +132,117 @@ def editar_candidato(request, id):
 # ==========================================
 def productos(request):
     admin_activo = es_admin(request.user)
+    superusuario_activo = es_superusuario(request.user)
     pedidos = Pedido.objects.all().order_by('-id') if admin_activo else None
+    mangonadas_db = Producto.objects.filter(activo=True, categoria='mangonada')
+    boyos_db = Producto.objects.filter(activo=True, categoria='boyo')
     return render(
         request,
         'productos.html',
         {
             'pedidos': pedidos,
             'es_admin': admin_activo,
+            'es_superusuario': superusuario_activo,
+            'mangonadas_db': mangonadas_db,
+            'boyos_db': boyos_db,
         },
     )
+
+
+@login_required(login_url='login')
+@user_passes_test(es_superusuario, login_url='productos')
+def agregar_producto(request):
+    if request.method == 'POST':
+        nombre = (request.POST.get('nombre') or '').strip()
+        descripcion = (request.POST.get('descripcion') or '').strip()
+        categoria = (request.POST.get('categoria') or 'boyo').strip()
+        precio_raw = (request.POST.get('precio') or '15').strip()
+        imagen = request.FILES.get('imagen')
+
+        if categoria not in ('mangonada', 'boyo'):
+            categoria = 'boyo'
+
+        try:
+            precio_val = float(precio_raw)
+        except ValueError:
+            precio_val = 0
+
+        if not nombre:
+            messages.error(request, 'Escribe el nombre del producto.')
+            return redirect('productos')
+
+        if precio_val <= 0:
+            messages.error(request, 'El precio debe ser mayor a 0.')
+            return redirect('productos')
+
+        if not imagen:
+            messages.error(request, 'Selecciona una imagen para el producto.')
+            return redirect('productos')
+
+        Producto.objects.create(
+            nombre=nombre,
+            descripcion=descripcion,
+            precio=precio_val,
+            categoria=categoria,
+            imagen=imagen,
+            activo=True,
+        )
+        messages.success(request, f'Producto "{nombre}" agregado con éxito.')
+    return redirect('productos')
+
+
+@login_required(login_url='login')
+@user_passes_test(es_superusuario, login_url='productos')
+def editar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    if request.method == 'POST':
+        nombre = (request.POST.get('nombre') or '').strip()
+        descripcion = (request.POST.get('descripcion') or '').strip()
+        categoria = (request.POST.get('categoria') or producto.categoria).strip()
+        precio_raw = (request.POST.get('precio') or str(producto.precio)).strip()
+        imagen = request.FILES.get('imagen')
+
+        if categoria not in ('mangonada', 'boyo'):
+            categoria = producto.categoria
+
+        try:
+            precio_val = float(precio_raw)
+        except ValueError:
+            precio_val = float(producto.precio)
+
+        if nombre:
+            producto.nombre = nombre
+        producto.descripcion = descripcion
+        producto.categoria = categoria
+        if precio_val > 0:
+            producto.precio = precio_val
+        if imagen:
+            producto.imagen = imagen
+
+        producto.save()
+        messages.success(request, f'Producto "{producto.nombre}" actualizado.')
+        return redirect('productos')
+
+    return render(
+        request,
+        'editar_producto.html',
+        {
+            'producto': producto,
+            'es_admin': es_admin(request.user),
+            'es_superusuario': es_superusuario(request.user),
+        },
+    )
+
+
+@login_required(login_url='login')
+@user_passes_test(es_superusuario, login_url='productos')
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    if request.method == 'POST':
+        nombre = producto.nombre
+        producto.delete()
+        messages.success(request, f'Producto "{nombre}" eliminado.')
+    return redirect('productos')
 
 
 @login_required(login_url='login')
