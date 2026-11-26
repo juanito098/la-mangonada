@@ -8,7 +8,7 @@ class empleado(models.Model):
     correo = models.EmailField(blank=True, null=True)
     en_nosotros = models.BooleanField(default=True)
 
-    def _str_(self):
+    def str(self):
         return self.nombre
 
 # Modelo completo para el checkout del carrito
@@ -22,5 +22,26 @@ class Pedido(models.Model):
     total = models.DecimalField(max_digits=8, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def str(self):
         return f"Pedido de {self.nombre_cliente} - Total: ${self.total}"
+
+# Modelo para productos agregados desde el panel del superusuario
+class Producto(models.Model):
+    CATEGORIAS = [
+        ('mangonada', 'Mangonada'),
+        ('boyo', 'Boyo Cremosito'),
+    ]
+
+    nombre = models.CharField(max_length=120)
+    descripcion = models.CharField(max_length=255, blank=True)
+    precio = models.DecimalField(max_digits=8, decimal_places=2, default=15.00)
+    categoria = models.CharField(max_length=20, choices=CATEGORIAS, default='boyo')
+    imagen = models.ImageField(upload_to='productos/')
+    activo = models.BooleanField(default=True)
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-id']
+
+    def _str_(self):
+        return f"{self.nombre} (${self.precio})"
