@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar Producto · La Mangonada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="{% url 'index' %}" class="brand">🥭 La <span>Mangonada</span></a>
+    <div class="nav-links">
+      <a href="{% url 'productos' %}">← Volver a Productos</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    </div>
+  </div>
+</nav>
+
+<section style="padding-top: 40px;">
+  <div class="container">
+    <div class="admin-producto-box">
+      <h3>✏️ Editar Producto: {{ producto.nombre }}</h3>
+      <form method="POST" enctype="multipart/form-data" class="form-producto-admin">
+        {% csrf_token %}
+        <div class="grid-form-producto">
+          <div class="campo-prod">
+            <label for="id_nombre">Nombre del producto</label>
+            <input type="text" id="id_nombre" name="nombre" value="{{ producto.nombre }}" required>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_categoria">Sección / Categoría</label>
+            <select id="id_categoria" name="categoria" required>
+              <option value="boyo" {% if producto.categoria == 'boyo' %}selected{% endif %}>Boyos Cremositos</option>
+              <option value="mangonada" {% if producto.categoria == 'mangonada' %}selected{% endif %}>Mangonadas</option>
+            </select>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_precio">Precio ($)</label>
+            <input type="number" id="id_precio" name="precio" step="0.01" min="0.50" value="{{ producto.precio }}" required>
+          </div>
+
+          <div class="campo-prod">
+            <label for="id_imagen">Cambiar imagen (opcional)</label>
+            <input type="file" id="id_imagen" name="imagen" accept="image/*">
+          </div>
+        </div>
+
+        <div class="campo-prod" style="margin-bottom: 14px;">
+          <label for="id_descripcion">Descripción breve</label>
+          <input type="text" id="id_descripcion" name="descripcion" value="{{ producto.descripcion }}">
+        </div>
+
+        {% if producto.imagen %}
+        <div style="margin-bottom: 16px;">
+          <p style="font-size: 0.9rem; font-weight: 700; margin-bottom: 6px;">Imagen actual:</p>
+          <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="max-width: 180px; border-radius: 12px;">
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn-guardar-producto">💾 Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
