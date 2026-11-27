@@ -3,9 +3,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('members', '0005_pedido_direccion_pedid_metodo_pago_pedid'),
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
