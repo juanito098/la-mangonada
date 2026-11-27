@@ -186,18 +186,22 @@ def agregar_producto(request):
             )
             url_imagen = resultado.get('secure_url', '')
         except Exception as e:
-            messages.error(request, f'Error al subir la imagen a Cloudinary: {e}')
+            messages.error(request, f'Error Cloudinary: {e}')
             return redirect('productos')
 
-        Producto.objects.create(
-            nombre=nombre,
-            descripcion=descripcion,
-            precio=precio_val,
-            categoria=categoria,
-            imagen_url=url_imagen,
-            activo=True,
-        )
-        messages.success(request, f'Producto "{nombre}" agregado con éxito.')
+        try:
+            Producto.objects.create(
+                nombre=nombre,
+                descripcion=descripcion,
+                precio=precio_val,
+                categoria=categoria,
+                imagen_url=url_imagen,
+                activo=True,
+            )
+            messages.success(request, f'Producto "{nombre}" agregado con éxito.')
+        except Exception as e:
+            messages.error(request, f'Error al guardar en BD: {e}')
+
     return redirect('productos')
 
 
