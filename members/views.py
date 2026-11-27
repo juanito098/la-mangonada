@@ -1,6 +1,7 @@
 import json
 import re
 from urllib.parse import quote
+import cloudinary.uploader
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -179,12 +180,21 @@ def agregar_producto(request):
             messages.error(request, 'Selecciona una imagen para el producto.')
             return redirect('productos')
 
+        try:
+            resultado = cloudinary.uploader.upload(
+                imagen, folder='la_mangonada/productos'
+            )
+            url_imagen = resultado.get('secure_url', '')
+        except Exception as e:
+            messages.error(request, f'Error al subir la imagen a Cloudinary: {e}')
+            return redirect('productos')
+
         Producto.objects.create(
             nombre=nombre,
             descripcion=descripcion,
             precio=precio_val,
             categoria=categoria,
-            imagen=imagen,
+            imagen_url=url_imagen,
             activo=True,
         )
         messages.success(request, f'Producto "{nombre}" agregado con éxito.')
@@ -216,8 +226,16 @@ def editar_producto(request, id):
         producto.categoria = categoria
         if precio_val > 0:
             producto.precio = precio_val
+
         if imagen:
-            producto.imagen = imagen
+            try:
+                resultado = cloudinary.uploader.upload(
+                    imagen, folder='la_mangonada/productos'
+                )
+                producto.imagen_url = resultado.get('secure_url', producto.imagen_url)
+            except Exception as e:
+                messages.error(request, f'Error al subir la nueva imagen: {e}')
+                return redirect('editar_producto', id=producto.id)
 
         producto.save()
         messages.success(request, f'Producto "{producto.nombre}" actualizado.')
