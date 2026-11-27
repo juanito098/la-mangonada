@@ -141,7 +141,9 @@
 
       {% for prod in mangonadas_db %}
       <div class="card">
-        {% if prod.imagen %}
+        {% if prod.imagen_url %}
+          <img src="{{ prod.imagen_url }}" alt="{{ prod.nombre }}">
+        {% elif prod.imagen %}
           <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}">
         {% endif %}
         <div class="card-body">
@@ -225,7 +227,9 @@
 
       {% for prod in boyos_db %}
       <div class="card">
-        {% if prod.imagen %}
+        {% if prod.imagen_url %}
+          <img src="{{ prod.imagen_url }}" alt="{{ prod.nombre }}">
+        {% elif prod.imagen %}
           <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}">
         {% endif %}
         <div class="card-body">
@@ -364,11 +368,6 @@
 
 
 <script>
-
-// NOTA: Se integró aquí la lógica del carrito y selección de extras de mangonadas
-// porque con cart.js hubo problemas constantes de caché y esta fue la manera más rápida de que
-// funcionara estable sin atorarse por caché.
-
 var carrito = [];
 var TOPPINGS_MANGONADA = ['Taj\u00edn', 'Lim\u00f3n', 'Chamoy', 'Ticko dulce'];
 
